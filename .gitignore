@@ -1,0 +1,62 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+.env.example.local
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+*.venv*
+
+# Docker & Data
+data/
+backups/
+docker-compose.override.yml
+
+# Certificates & Keys (if private)
+certs/*.key
+certs/*.crt
+*.pem
+
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+
+# Logs
+*.log
+logs/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*~
+
+# OS Specific
+.AppleDouble
+.LSOverride
+Icon
+
+# Backup Files
+*.bak
+*.backup
+*.swp
+*~
