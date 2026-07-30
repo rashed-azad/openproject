@@ -41,6 +41,7 @@ DB_NAME=openproject
 SECRET_KEY_BASE=generate_below
 HOST_NAME=localhost
 APP_PORT=8081
+BACKUP_DIR=/your/backup/path
 EOF
 ```
 
@@ -51,6 +52,8 @@ openssl rand -hex 32
 
 Copy output and replace `generate_below` in `.env`.
 
+---
+
 ## Step 5: Start Containers
 
 ```bash
@@ -58,6 +61,8 @@ docker-compose up -d
 sleep 60
 docker-compose ps
 ```
+
+Both should show **Up**.
 
 ---
 
@@ -116,30 +121,43 @@ HOST_NAME=192.168.x.x
 
 ---
 
+## Backup & Restore
+
+All scripts are inside `help/` folder. Run from project root:
+
+### Backup
+```bash
+./help/backup.sh
+```
+
+### Restore
+```bash
+./help/restore.sh
+```
+
+### Drop Database (before restore on existing install)
+```bash
+./help/drop_db.sh
+```
+
+### Setup Hourly Backup (cron)
+```bash
+crontab -e
+```
+
+Add:
+```
+0 * * * * cd ~/openproject && ./help/backup.sh >> ${BACKUP_DIR}/backup.log 2>&1
+```
+
+---
+
 ## Troubleshooting
 
 ### Reset Password
 
 ```bash
 docker-compose exec openproject bundle exec rails runner "User.find_by(login: 'username').update(password: 'newpass', password_confirmation: 'newpass')"
-```
-
----
-
-## Data Backup
-
-Export:
-```bash
-docker volume export postgres_data > postgres.tar.gz
-docker volume export openproject_data > openproject.tar.gz
-```
-
-Import (new computer):
-```bash
-docker volume create postgres_data
-docker volume create openproject_data
-docker volume import postgres_data postgres.tar.gz
-docker volume import openproject_data openproject.tar.gz
 ```
 
 ---
