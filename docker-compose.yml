@@ -11,7 +11,7 @@ services:
     restart: always
 
   openproject:
-    image: openproject/community:13.4.1
+    image: openproject/openproject:17.6.0-slim
     container_name: openproject-app
     depends_on:
       - postgres
