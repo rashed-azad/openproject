@@ -147,7 +147,7 @@ crontab -e
 
 Add:
 ```
-0 * * * * cd ~/openproject && ./help/backup.sh >> ${BACKUP_DIR}/backup.log 2>&1
+0 * * * * cd ~/openproject && ./help/backup.sh
 ```
 
 ---
