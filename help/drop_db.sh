@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "../$(dirname "$0")/.env"
+source .env
 
 docker-compose stop openproject
 docker exec -i openproject-db psql -U "${DB_USER}" -d postgres -c "DROP DATABASE ${DB_NAME};"
