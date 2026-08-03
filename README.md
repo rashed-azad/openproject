@@ -64,6 +64,12 @@ docker-compose ps
 
 Both should show **Up**.
 
+Run database migrations (required on first install or after upgrading):
+
+```bash
+docker-compose run --rm openproject bundle exec rails db:migrate
+docker-compose restart openproject
+```
 ---
 
 ## Step 6: Access OpenProject

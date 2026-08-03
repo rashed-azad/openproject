@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.6-alpine
+    image: postgres:17-alpine
     container_name: openproject-db
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -22,8 +22,16 @@ services:
       OPENPROJECT_HOST_NAME: ${HOST_NAME}
       OPENPROJECT_HTTPS: "false"
       OPENPROJECT_FORCE_SSL: "false"
+      # Community Edition appearance
+      OPENPROJECT_EDITION: "standard"
+      # Hide Enterprise UI where possible
+      OPENPROJECT_EE__HIDE__BANNERS: "true"
+      OPENPROJECT_EE__MANAGER__VISIBLE: "false"
+      # Hide community links
+      OPENPROJECT_SHOW__COMMUNITY__LINKS: "false"
+      OPENPROJECT_DISABLED__MODULES: "team_planner_view"
     ports:
-      - "${APP_PORT}:80"
+      - "${APP_PORT}:8080"
     volumes:
       - openproject_data:/var/openproject/assets
     restart: always
